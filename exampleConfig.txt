@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+  <configuration>
+    <appSettings>
+      <add key="messageCollection" value="foo"/>
+      <add key="newsCollection-fi" value="foo"/>
+      <add key="newsCollection-en" value="foo"/>
+      <add key="BlogCollection-fi" value="bar"/>
+      <add key="BlogCollection-en" value="bar"/>
+      <!--Insert series in here comma seperated-->
+      <add key="series" value="foo,bar"/>
+      <add key="locales" value="bar,foo"/>
+    </appSettings>
+  </configuration>

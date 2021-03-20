@@ -1,0 +1,30 @@
+﻿<Page x:Class="Catsopinion_admin.MainMenu"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Catsopinion_admin"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="MainMenu">
+
+    <Grid Cursor="Hand">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <Label Content="Main menu" Grid.Column="1" Style="{StaticResource DefaultHeadlineStyle}"></Label>
+        <Button Template="{DynamicResource hover}" Content="Blog" Click="NavigateToBlog" HorizontalAlignment="Center" VerticalAlignment="Bottom" Grid.Row="1" Grid.Column="1" MinWidth="100" MinHeight="30" Style="{StaticResource defaultBtnStyle}"/>
+        <Button Template="{DynamicResource hover}" Content="News" Click="NavigateToNews" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="2" Grid.Column="1" MinWidth="100" MinHeight="30" Style="{StaticResource defaultBtnStyle}" />
+        <Button Template="{DynamicResource hover}" Content="Message" Click="NavigateToMessages" HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Row="3" Grid.Column="1" MinWidth="100" MinHeight="30" Style="{StaticResource defaultBtnStyle}"/>
+
+    </Grid>
+</Page>

@@ -1,0 +1,51 @@
+﻿<Page x:Class="Catsopinion_admin.NewsPageDelete"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Catsopinion_admin"
+      mc:Ignorable="d" 
+      d:DesignHeight="720" d:DesignWidth="1280"
+      Title="NewsPageDelete">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.1*"></RowDefinition>
+            <RowDefinition Height="0.7*"></RowDefinition>
+            <RowDefinition Height="0.2*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.2*"></ColumnDefinition>
+            <ColumnDefinition Width="1*"></ColumnDefinition>
+            <ColumnDefinition Width="0.2*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Row="2" Grid.Column="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.5*" ></ColumnDefinition>
+                <ColumnDefinition Width="0.5*" ></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid  Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Label Content="Insert id to be deleted: " HorizontalAlignment="Right" Height="26" Style="{StaticResource normalLabel}"></Label>
+                <TextBox x:Name="idToDelete" HorizontalAlignment="Center" VerticalAlignment="Center" Height="26" Grid.Column="1" Width="228"/>
+            </Grid>
+            <Button Content="DELETE" Click="DeleteMessage" Cursor="Hand" HorizontalAlignment="Left" VerticalAlignment="Center" Height="25" Width="156" Grid.Row="1" Grid.Column="1" Style="{StaticResource defaultBtnStyle}" Template="{DynamicResource hover}" Background="Red" />
+        </Grid>
+        <Button Content="main menu" Click="BackToMainMenu" Cursor="Hand" HorizontalAlignment="Center" VerticalAlignment="Center" Height="25" Width="100" Grid.Row="2" Grid.Column="0" Style="{StaticResource defaultBtnStyle}" Template="{DynamicResource hover}" />
+        <Label Content="Delete messages" Grid.ColumnSpan="3" Style="{StaticResource DefaultHeadlineStyle}"></Label>
+        <DataGrid Grid.Column="1" Grid.Row="1" x:Name="dataListGrid" ItemsSource="{Binding}" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Id" Binding="{Binding id}" Width="0.1*"></DataGridTextColumn>
+                <DataGridTextColumn Header="Locale" Binding="{Binding locale}" Width="0.07*"></DataGridTextColumn>
+                <DataGridTextColumn Header="Date" Binding="{Binding date}" Width="0.07*"></DataGridTextColumn>
+                <DataGridTextColumn Header="Headline" Binding="{Binding headline}" Width="0.2*"></DataGridTextColumn>
+                <DataGridTextColumn Header="Message" Binding="{Binding message}" Width="0.2*"></DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Page>
