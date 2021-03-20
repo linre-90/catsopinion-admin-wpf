@@ -1,0 +1,3 @@
+# catsopinion-admin-wpf
+
+Cats opinion desktop application. Application makes adding blog posts and general data managing a breeze...
