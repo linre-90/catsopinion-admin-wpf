@@ -73,7 +73,7 @@
                 <ColumnDefinition Width="1*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <Label Content="View in html:" Grid.Column="0" Style="{StaticResource normalLabel}"></Label>
-            <TextBox x:Name="view" Grid.Column="1" Height="80" TextWrapping="Wrap"/>
+            <TextBox x:Name="view" Grid.Column="1" Height="80" TextWrapping="Wrap" AcceptsReturn="True"/>
         </Grid>
        
     </Grid>
