@@ -24,7 +24,6 @@
         <Label Content="Main menu" Grid.Column="1" Style="{StaticResource DefaultHeadlineStyle}"></Label>
         <Button Template="{DynamicResource hover}" Content="Blog" Click="NavigateToBlog" HorizontalAlignment="Center" VerticalAlignment="Bottom" Grid.Row="1" Grid.Column="1" MinWidth="100" MinHeight="30" Style="{StaticResource defaultBtnStyle}"/>
         <Button Template="{DynamicResource hover}" Content="News" Click="NavigateToNews" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="2" Grid.Column="1" MinWidth="100" MinHeight="30" Style="{StaticResource defaultBtnStyle}" />
-        <Button Template="{DynamicResource hover}" Content="Message" Click="NavigateToMessages" HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Row="3" Grid.Column="1" MinWidth="100" MinHeight="30" Style="{StaticResource defaultBtnStyle}"/>
-
+        <Button IsEnabled="false" Template="{DynamicResource hover}" Content="Message" Click="NavigateToMessages" HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Row="3" Grid.Column="1" MinWidth="100" MinHeight="30" Style="{StaticResource defaultBtnStyle}"/>
     </Grid>
 </Page>
