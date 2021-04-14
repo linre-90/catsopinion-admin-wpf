@@ -10,7 +10,7 @@ namespace Catsopinion_admin
 {
     /// <summary>
     /// Interaction logic for messages.xaml
-    /// TODO make delete!
+    /// DEPRECATED. WILL BE REMOVED!!
     /// </summary>
     public partial class messages : Page
     {

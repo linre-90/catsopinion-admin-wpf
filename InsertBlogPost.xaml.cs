@@ -1,16 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
-using System.Diagnostics;
 using Catsopinion_admin.Logic;
 using System.Collections.ObjectModel;
 
@@ -25,21 +18,34 @@ namespace Catsopinion_admin
         {
             InitializeComponent();
             BuildData();
-            this.FillDropDown(seriesDropdown, this.ReadSeries());
+            this.ReadSeries();
             this.FillDropDown(localesDrobdown, this.ReadLocales());
         }
 
-        /* Buttons back to main */
+        /// <summary>
+        /// Function for navigation.
+        /// Changes view to MainMenu.xaml
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void GoBackToMain(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new Uri("MainMenu.xaml", UriKind.Relative));
         }
+
+        /// <summary>
+        /// Save button functionality.
+        /// Calls methods ValidatePost() and BuildData() 
+        /// Asks user confirmation to validate saving or chance to back out.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private async void SaveNewPost(object sender, RoutedEventArgs e)
         {
             if (this.ValidatePost())
             {
                 MessageBoxResult wannaInsert = MessageBox.Show("Are you sure you want to add post?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
-                if(wannaInsert == MessageBoxResult.Yes)
+                if (wannaInsert == MessageBoxResult.Yes)
                 {
                     CollectionHandler collectionHandler = new CollectionHandler();
                     FirebaseHandler firebaseHandler = new FirebaseHandler();
@@ -66,12 +72,23 @@ namespace Catsopinion_admin
 
         }
 
-        private string[] ReadSeries()
+        /// <summary>method <c>ReadSeries</c> Reads series information from firestore. Sets cursor to wait and releases it after data is fetched</summary>
+        private async void ReadSeries()
         {
-            CollectionHandler collectionHandler = new CollectionHandler();
-            string series = collectionHandler.GetSeries();
-            return series.Split(",");
+            Mouse.OverrideCursor = Cursors.Wait;
+            FirebaseHandler firebaseHandler = new FirebaseHandler();
+            List<Dictionary<string, object>> data = await firebaseHandler.GetCollection("series");
+            List<string> temp = new List<string>();
+            foreach (Dictionary<string, object> x in data)
+            {
+                x.TryGetValue("name", out object name);
+                temp.Add(name.ToString());
+            }
+            this.FillDropDown(seriesDropdown, temp.ToArray());
+            Mouse.OverrideCursor = null;
         }
+
+        /// <summary>method <c>ReadLocales</c> Reads locales from app.config file.</summary><returns>Nothing</returns>
         private string[] ReadLocales()
         {
             CollectionHandler collectionHandler = new CollectionHandler();
@@ -79,7 +96,14 @@ namespace Catsopinion_admin
             return series.Split(",");
         }
 
-
+        /// <summary>
+        /// <c>FillDropDown</c>
+        /// Fills dropdown with given data
+        /// </summary>
+        /// <param name="box">Combobox item</param>
+        /// <param name="data">string array</param>
+        /// <returns>Nothing</returns>
+        /// 
         private void FillDropDown(ComboBox box, string[] data)
         {
             ObservableCollection<string> observableData = new ObservableCollection<string>();
@@ -90,7 +114,11 @@ namespace Catsopinion_admin
             box.ItemsSource = observableData;
         }
 
-        // stupid but fast to write
+        /// <summary>
+        /// Validates form data. Checks only that everyfield has something in it.
+        /// Is stupid, make better function at some point.
+        /// </summary>
+        /// <returns>True on valid form othervise False</returns>
         private bool ValidatePost()
         {
             if(seriesDropdown.Text.Length < 2 || localesDrobdown.Text.Length < 2)
@@ -113,12 +141,16 @@ namespace Catsopinion_admin
             return true;
         }
 
-
+        /// <summary>
+        /// Builds data to dictionary.
+        /// Returned data is ready to be send to FirebaseHandler for saving.
+        /// </summary>
+        /// <returns> Dictionary</returns>
         private Dictionary<string, object> BuildData()
         {
             Dictionary<string, object> data = new Dictionary<string, object>();
             DateTime thisDay = DateTime.Today;
-            data["date"] = thisDay.Month + "/" + thisDay.Day + "/" + thisDay.Year;
+            data["date"] = thisDay.Month + "/" + thisDay.Day.ToString("00") + "/" + thisDay.Year;
             data["dislikes"] = 0;
             data["likes"] = 0;
             //comes from form

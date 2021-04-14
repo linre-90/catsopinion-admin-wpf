@@ -27,11 +27,23 @@ namespace Catsopinion_admin
             this.GetData();
         }
 
+
+        /// <summary>
+        /// back button to main menu
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BackToMainMenu(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new Uri("/MainMenu.xaml", UriKind.Relative));
         }
 
+
+        /// <summary>
+        /// Deletes message. Gets id to remove from input field.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private async void DeleteMessage(object sender, RoutedEventArgs e)
         {
             MessageBoxResult result = MessageBox.Show("Are you sure you want to delete?", "Deleting", MessageBoxButton.YesNo, MessageBoxImage.Question);
@@ -78,6 +90,12 @@ namespace Catsopinion_admin
             }
         }
 
+
+        /// <summary>
+        /// Loads news from firestore.
+        /// Controls mouse cursor to show loading. Raises exception if firebase fails.
+        /// </summary>
+        /// <exception cref="Exception">Errors in firebase</exception>
         private async void GetData()
         {
             Mouse.OverrideCursor = Cursors.Wait;
@@ -98,6 +116,10 @@ namespace Catsopinion_admin
             }
         }
 
+
+        /// <summary>
+        /// converts loaded data to dataModel object for observableCollection.  
+        /// </summary>
         private void FillDataCollection()
         {
             foreach (Dictionary<string,object> item in this.news)
@@ -116,6 +138,10 @@ namespace Catsopinion_admin
         }
     }
 
+
+    /// <summary>
+    /// Data model for observableCollection
+    /// </summary>
     public class dataModel
     {
         public string id { get; set; }

@@ -23,19 +23,38 @@ namespace Catsopinion_admin
             dateBox.Text = DateToday();
         }
 
+
+        /// <summary>
+        /// Navigation route to main menu
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BackBtnClick(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new Uri("/MainMenu.xaml", UriKind.Relative));
         }
 
+
+        /// <summary>
+        /// Opens remove view
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void OpenRemove(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new Uri("/NewsPageDelete.xaml", UriKind.Relative));
         }
 
+
+
+        /// <summary>
+        /// Saves new news to database
+        /// Controls mouse cursor, sets it to loading and when done to normal. TODO form validation
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private async void SaveToDb(object sender, RoutedEventArgs e)
         {
-            // show that we are loading and not freezing
             Mouse.OverrideCursor = Cursors.Wait;
             Dictionary<string, object> formData = new Dictionary<string, object>
             {
@@ -44,12 +63,8 @@ namespace Catsopinion_admin
                 { "locale", localeBox.Text },
                 { "message", messageBox.Text }
             };
-
-            // TODO form validation with dictionary
-
             FirebaseHandler FH = new FirebaseHandler();
             string[] result = await FH.SaveToDb(formData, this.collectionHandler.GetNewsCollection(formData["locale"].ToString()));
-            // back to normal
             Mouse.OverrideCursor = null;
             if (result[0].Equals("200"))
             {
@@ -61,6 +76,10 @@ namespace Catsopinion_admin
             }
         }
 
+        /// <summary>
+        /// Return current date for time stamp
+        /// </summary>
+        /// <returns></returns>
         private string DateToday()
         {
             DateTime thisDay = DateTime.Today;
